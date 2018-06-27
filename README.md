@@ -6,3 +6,7 @@ In the current thesis a specific programme for selecting candidates for working 
 Specific attention is paid to the speed of response, system scalability, work with a big amount of information, programme protection and easy programme management.
  The main information about the stages of projecting and developing of the application is provided as well. 
 Moreover, the programme was verified to analyze its correctness and identify mistakes. The development environment which was used is JDeveloper. The language of programme development is Java.
+
++<p align="center">
++  <img src="https://imgur.com/gallery/yDgiiOD.gif"/>
++</p>
