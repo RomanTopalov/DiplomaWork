@@ -7,6 +7,6 @@ Specific attention is paid to the speed of response, system scalability, work wi
  The main information about the stages of projecting and developing of the application is provided as well. 
 Moreover, the programme was verified to analyze its correctness and identify mistakes. The development environment which was used is JDeveloper. The language of programme development is Java.
 
-+<p align="center">
-+  <img src="https://imgur.com/gallery/yDgiiOD.gif"/>
-+</p>
+<p align="center">
+  <img src="http://i.imgur.com/N7jsHCy.gif"/>
+</p>
