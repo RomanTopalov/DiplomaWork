@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="Jobs"
+  Version="12.2.1.12.2"
+  InheritPersonalization="merge"
+  DBObjectType="table"
+  DBObjectName="JOBS"
+  AliasName="Jobs"
+  BindingStyle="OracleName"
+  >
+
+  
+
+<Attribute
+    Name="JobId"
+    ColumnName="JOB_ID"
+    SQLType="VARCHAR"
+  Type="java.lang.String"
+  ColumnType="VARCHAR2"
+    TableName="JOBS"
+    PrimaryKey="true"
+  Precision="35"
+  IsNotNull="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+    <TransientExpression
+      Name="ExpressionScript"
+      CodeSourceName="JobsRow"/>
+    <RecalcCondition
+      Name="RecalcExpressionScript"
+      trustMode="untrusted"
+      CodeSourceName="JobsRow"/>
+  </Attribute>
+  <Attribute
+    Name="JobTitle"
+    IsNotNull="true"
+    Precision="35"
+    ColumnName="JOB_TITLE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="JOBS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="35"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="MinSalary"
+    Precision="6"
+    Scale="0"
+    ColumnName="MIN_SALARY"
+    SQLType="NUMERIC"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    TableName="JOBS"/>
+  <Attribute
+    Name="MaxSalary"
+    Precision="6"
+    Scale="0"
+    ColumnName="MAX_SALARY"
+    SQLType="NUMERIC"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    TableName="JOBS"/>
+  <AccessorAttribute
+    Name="Employees"
+    Association="model.EmpJobFkAssoc"
+    AssociationEnd="model.EmpJobFkAssoc.Employees"
+    AssociationOtherEnd="model.EmpJobFkAssoc.Jobs"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="JobHistory"
+    Association="model.JhistJobFkAssoc"
+    AssociationEnd="model.JhistJobFkAssoc.JobHistory"
+    AssociationOtherEnd="model.JhistJobFkAssoc.Jobs"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <Key
+    Name="JobIdPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="JOB_ID_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="model.Jobs.JobId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="JobTitleNn">
+    <DesignTime>
+      <Attr Name="_checkCondition" Value='"JOB_TITLE" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+      <Attr Name="_DBObjectName" Value="JOB_TITLE_NN"/>
+    </DesignTime>
+    <AttrArray Name="Attributes"/>
+  </Key>
+  <Key
+    Name="JobsJobIdCheck">
+    <DesignTime>
+      <Attr Name="_isNotNull" Value="true"/>
+      <Attr Name="_checkCondition" Value='"JOB_ID" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+      <Attr Name="_DBObjectName" Value="JOBS_JOB_ID_CHECK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="model.Jobs.JobId"/>
+    </AttrArray>
+  </Key>
+</Entity>

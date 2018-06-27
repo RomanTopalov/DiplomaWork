@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="index-task-flow">
+    <default-activity>index</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <input-parameter-definition id="__7">
+      <name>inOperationType</name>
+      <value>#{pageFlowScope.inOperationType}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <managed-bean id="__3">
+      <managed-bean-name>MapBean</managed-bean-name>
+      <managed-bean-class>view.bean.MapBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__1">
+      <managed-bean-name>TriggerBean</managed-bean-name>
+      <managed-bean-class>view.TriggerBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__9">
+      <managed-bean-name>SequrityBean</managed-bean-name>
+      <managed-bean-class>view.SequrityBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="index">
+      <page>/index.jsff</page>
+    </view>
+    <router id="router">
+      <case id="__8">
+        <expression>#{pageFlowScope.inOperationType=='goToEmployee'}</expression>
+        <outcome>goToEmployee</outcome>
+      </case>
+      <default-outcome>goToEmployee</default-outcome>
+    </router>
+    <task-flow-call id="employeeCRUDService">
+      <task-flow-reference>
+        <document>/WEB-INF/employeeCRUDService.xml</document>
+        <id>employeeCRUDService</id>
+      </task-flow-reference>
+    </task-flow-call>
+    <control-flow-rule id="__2">
+      <from-activity-id>index</from-activity-id>
+      <control-flow-case id="__4">
+        <from-outcome>goToRouter</from-outcome>
+        <to-activity-id>router</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__5">
+      <from-activity-id>router</from-activity-id>
+      <control-flow-case id="__6">
+        <from-outcome>goToEmployee</from-outcome>
+        <to-activity-id>employeeCRUDService</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

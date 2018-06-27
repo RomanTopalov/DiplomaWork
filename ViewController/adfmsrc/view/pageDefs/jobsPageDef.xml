@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.12.2" id="jobsPageDef"
+                Package="view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="JobsView1" RangeSize="-1" DataControl="AppModuleDataControl" id="JobsView1Iterator"/>
+    <searchRegion Binds="JobsView1Iterator" Criteria="" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="JobsView1Query"/>
+    <iterator Binds="EmployeesView4" RangeSize="25" DataControl="AppModuleDataControl" id="EmployeesView4Iterator"/>
+    <iterator Binds="JobHistoryView4" RangeSize="-1" DataControl="AppModuleDataControl" id="JobHistoryView4Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="JobsView1Iterator" id="JobsView1">
+      <nodeDefinition DefName="model.JobsView" Name="JobsView10">
+        <AttrNames>
+          <Item Value="JobTitle"/>
+          <Item Value="MinSalary"/>
+          <Item Value="MaxSalary"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <listOfValues IterBinding="JobsView1Iterator" StaticList="false" Uses="LOV_JobTitle" id="JobTitle"/>
+    <attributeValues IterBinding="EmployeesView4Iterator" id="FirstName">
+      <AttrNames>
+        <Item Value="FirstName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="EmployeesView4Iterator" id="LastName">
+      <AttrNames>
+        <Item Value="LastName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="EmployeesView4Iterator" id="Email">
+      <AttrNames>
+        <Item Value="Email"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="EmployeesView4Iterator" id="PhoneNumber">
+      <AttrNames>
+        <Item Value="PhoneNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="EmployeesView4Iterator" id="HireDate">
+      <AttrNames>
+        <Item Value="HireDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="EmployeesView4Iterator" id="Salary">
+      <AttrNames>
+        <Item Value="Salary"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="JobsView1Iterator" id="JobsView11" ChangeEventPolicy="ppr">
+      <nodeDefinition DefName="model.JobsView" Name="JobsView11">
+        <AttrNames>
+          <Item Value="MaxSalary"/>
+          <Item Value="MinSalary"/>
+          <Item Value="JobTitle"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="JobHistoryView4Iterator" id="EmployeeId">
+      <AttrNames>
+        <Item Value="EmployeeId"/>
+      </AttrNames>
+    </attributeValues>
+
+    <attributeValues IterBinding="JobHistoryView4Iterator" id="StartDate">
+      <AttrNames>
+        <Item Value="StartDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="JobHistoryView4Iterator" id="EndDate">
+      <AttrNames>
+        <Item Value="EndDate"/>
+      </AttrNames>
+    </attributeValues><attributeValues IterBinding="JobHistoryView4Iterator" id="JobId">
+      <AttrNames>
+        <Item Value="JobId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="JobHistoryView4Iterator" id="DepartmentId">
+      <AttrNames>
+        <Item Value="DepartmentId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="JobsView1Iterator" id="JobTitle1">
+      <AttrNames>
+        <Item Value="JobTitle"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="JobsView1Iterator" id="MaxSalary">
+      <AttrNames>
+        <Item Value="MaxSalary"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="JobsView1Iterator" id="MinSalary">
+      <AttrNames>
+        <Item Value="MinSalary"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

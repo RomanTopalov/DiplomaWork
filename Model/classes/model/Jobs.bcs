@@ -1,0 +1,20 @@
+//Groovy Scripts for model.Jobs
+
+package model
+
+import oracle.jbo.script.annotation.TransientValueExpression;
+import oracle.jbo.script.annotation.RefreshExpression;
+
+@TransientValueExpression(attributeName="JobId")
+def JobId_ExpressionScript_Expression()
+{
+(new oracle.jbo.server.SequenceImpl("JOBS_SEQ",adf.object.getDBTransaction())).getSequenceNumber()
+}
+
+
+@RefreshExpression(attributeName="JobId")
+def JobId_RecalcExpressionScript_RecalcExpression()
+{
+true
+}
+

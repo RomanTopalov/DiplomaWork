@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application" version="12.2.1.12.2" id="DataBindings"
+             SeparateXMLFiles="false" Package="view" ClientType="Generic">
+  <definitionFactories>
+    <factory nameSpace="http://xmlns.oracle.com/adfm/dvt"
+             className="oracle.adfinternal.view.faces.dvt.model.binding.FacesBindingFactory"/>
+    <factory nameSpace="http://xmlns.oracle.com/adf/controller/binding"
+             className="oracle.adf.controller.internal.binding.TaskFlowBindingDefFactoryImpl"/>
+    <dtfactory className="oracle.adf.controller.internal.dtrt.binding.BindingDTObjectFactory"/>
+  </definitionFactories>
+  <pageMap>
+    <page path="/index.jsff" usageId="view_indexPageDef"/>
+    <page path="/index.jspx" usageId="view_indexPageDef1"/>
+    <page path="/jobs.jsff" usageId="view_jobsPageDef"/>
+    <page path="/jobInfoMsg.jsff" usageId="view_jobInfoMsgPageDef"/>
+    <page path="/employeeCRUD.jsff" usageId="view_employeeCRUDPageDef"/>
+    <page path="/jobs.jspx" usageId="view_jobsPageDef1"/>
+    <page path="/welcome.jsff" usageId="view_welcomePageDef"/>
+    <page path="/welcome.jspx" usageId="view_welcomePageDef1"/>
+  </pageMap>
+  <pageDefinitionUsages>
+    <page id="view_indexPageDef" path="view.pageDefs.indexPageDef"/>
+    <page id="view_indexPageDef1" path="view.pageDefs.indexPageDef1"/>
+    <page id="view_jobsPageDef" path="view.pageDefs.jobsPageDef"/>
+    <page id="view_jobInfoMsgPageDef" path="view.pageDefs.jobInfoMsgPageDef"/>
+    <page id="view_employeeCRUDPageDef" path="view.pageDefs.employeeCRUDPageDef"/>
+    <page id="view_jobsPageDef1" path="view.pageDefs.jobsPageDef1"/>
+    <page id="view_welcomePageDef" path="view.pageDefs.welcomePageDef"/>
+    <page id="view_welcomePageDef1" path="view.pageDefs.welcomePageDef1"/>
+  </pageDefinitionUsages>
+  <dataControlUsages>
+    <dc id="JobEmplInfo" path="model.JobEmplInfo"/>
+    <dc id="JobsPojo" path="model.JobsPojo"/>
+    <dc id="EmployeePojo1" path="model.EmployeePojo"/>
+    <dc id="EmployeePojo" path="com.model.EmployeePojo"/>
+    <BC4JDataControl id="AppModuleDataControl" Package="model"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                     SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true" Configuration="AppModuleLocal" syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+    <BC4JDataControl id="AppModuleDataControl1" Package="com.model"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                     SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true" Configuration="AppModuleLocal" syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+  </dataControlUsages>
+</Application>

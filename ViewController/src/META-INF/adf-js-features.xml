@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<features xmlns="http://xmlns.oracle.com/adf/faces/feature">
+  <feature>
+    <feature-name>Test_topalovDiagramLayout</feature-name>
+    <feature-class>js/layout/Test_topalovDiagramLayout.js</feature-class>
+  </feature>
+</features>

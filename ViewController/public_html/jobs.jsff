@@ -1,0 +1,211 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core" xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
+  <af:panelStretchLayout id="psl1" topHeight="51px">
+    <f:facet name="start"/>
+    <f:facet name="end"/>
+    <f:facet name="top">
+      <af:panelGroupLayout id="pgl2" layout="horizontal" halign="right" valign="middle">
+        <af:button text="Jobs Service" id="b1" inlineStyle="margin-right:50px;" action="infoMsg"/>
+      </af:panelGroupLayout>
+    </f:facet>
+    <f:facet name="bottom"/>
+    <f:facet name="center">
+    <af:panelGroupLayout id="pgl5">
+        <af:panelSplitter id="ps4" inlineStyle="width:1482px; height:476px;" splitterPosition="443">
+              <f:facet name="first">
+            <af:panelGroupLayout id="pgl1" layout="vertical">
+              <af:panelHeader text="Job description" id="ph1">
+                <f:facet name="toolbar"/>
+                <f:facet name="menuBar"/>
+                <af:panelFormLayout id="pfl3">
+                  <af:panelGroupLayout id="pgl11" layout="vertical" inlineStyle="width:414px;">
+                    <af:panelLabelAndMessage label="#{bindings.JobTitle1.hints.label}" id="plam1">
+                      <af:outputText value="#{bindings.JobTitle1.inputValue}"
+                                     shortDesc="#{bindings.JobTitle1.hints.tooltip}" id="ot4"/>
+                    </af:panelLabelAndMessage>
+                    <af:spacer width="10" height="10" id="s2"/>
+                    <af:panelGroupLayout id="pgl10" layout="horizontal" inlineStyle="font-weight:bold;">
+                      <af:outputText value="Min Salary" id="ot6"/>
+                      <dvt:statusMeterGauge plotArea="on" id="statusMeterGauge2" maximum="30000"
+                                            value="#{bindings.MinSalary.inputValue}" minimum="0">
+                        <dvt:gaugeMetricLabel rendered="true" id="gml2"/>
+                        <dvt:gaugeThreshold color="#84ffff" maximum="0" id="thr3"/>
+                        <dvt:gaugeThreshold color="#3173ff" id="thr4"/>
+                      </dvt:statusMeterGauge>
+                    </af:panelGroupLayout>
+                    <af:spacer width="10" height="10" id="s1"/>
+                    <af:panelGroupLayout id="pgl9" layout="horizontal" inlineStyle="font-weight:bold;">
+                      <af:outputText value="Max Salary" id="ot5"/>
+                      <dvt:statusMeterGauge plotArea="on" id="statusMeterGauge1" maximum="50000"
+                                            value="#{bindings.MaxSalary.inputValue}" minimum="0">
+                        <dvt:gaugeMetricLabel rendered="true" id="gml1"/>
+                        <dvt:gaugeThreshold color="#ffff94" maximum="0" id="thr1"/>
+                        <dvt:gaugeThreshold color="#ff0000" id="thr2"/>
+                      </dvt:statusMeterGauge>
+                    </af:panelGroupLayout>
+                    <af:spacer width="10" height="10" id="s3"/>
+                    <af:panelLabelAndMessage label="#{bindings.StartDate.hints.label}" id="plam2">
+                      <af:outputText value="#{bindings.StartDate.inputValue}"
+                                     shortDesc="#{bindings.StartDate.hints.tooltip}" id="ot7">
+                        <af:convertDateTime pattern="#{bindings.StartDate.format}"/>
+                      </af:outputText>
+                    </af:panelLabelAndMessage>
+                    <af:spacer width="10" height="10" id="s4"/>
+                    <af:panelLabelAndMessage label="#{bindings.EndDate.hints.label}" id="plam3">
+                      <af:outputText value="#{bindings.EndDate.inputValue}"
+                                     shortDesc="#{bindings.EndDate.hints.tooltip}" id="ot8">
+                        <af:convertDateTime pattern="#{bindings.EndDate.format}"/>
+                      </af:outputText>
+                    </af:panelLabelAndMessage>
+                  </af:panelGroupLayout>
+                </af:panelFormLayout>
+              </af:panelHeader>
+              <af:panelFormLayout id="pfl2">
+                <f:facet name="footer"/>
+                <dvt:areaChart id="areaChart1" var="row" value="#{bindings.JobsView11.collectionModel}">
+                  <dvt:chartLegend id="cl1"/>
+                  <f:facet name="dataStamp">
+                    <dvt:chartDataItem id="di1" series="#{row.JobTitle}" value="#{row.MaxSalary}"
+                                       group="#{row.MinSalary}"/>
+                  </f:facet>
+                </dvt:areaChart>
+              </af:panelFormLayout>
+            </af:panelGroupLayout>
+          </f:facet>
+              <f:facet name="second">
+                <af:panelSplitter id="ps5" splitterPosition="339">
+                  <f:facet name="first">
+                <af:table value="#{bindings.JobsView1.collectionModel}" var="row" rows="#{bindings.JobsView1.rangeSize}"
+                          emptyText="#{bindings.JobsView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          rowBandingInterval="0" selectedRowKeys="#{bindings.JobsView1.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.JobsView1.collectionModel.makeCurrent}" rowSelection="single"
+                          fetchSize="#{bindings.JobsView1.rangeSize}"
+                          filterModel="#{bindings.JobsView1Query.queryDescriptor}" filterVisible="true"
+                          queryListener="#{bindings.JobsView1Query.processQuery}" varStatus="vs" id="t1">
+                  <af:column sortProperty="#{bindings.JobsView11.hints.JobTitle.name}" filterable="true" sortable="true"
+                             headerText="#{bindings.JobsView1.hints.JobTitle.label}" id="c1">
+                    <af:link id="l2" text=" " action="#{pageFlowScope.JobManagerBean.showAddtInfojob}">
+                      <af:outputText value="#{row.JobTitle}" shortDesc="#{bindings.JobsView1.hints.JobTitle.tooltip}"
+                                     id="ot1"/>
+                    </af:link>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.JobsView11.hints.MinSalary.name}" filterable="true" sortable="true"
+                             headerText="#{bindings.JobsView1.hints.MinSalary.label}" id="c2">
+                    <af:outputText value="#{row.MinSalary}" shortDesc="#{bindings.JobsView1.hints.MinSalary.tooltip}"
+                                   id="ot2">
+                      <af:convertNumber groupingUsed="false" pattern="#{bindings.JobsView1.hints.MinSalary.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.JobsView11.hints.MaxSalary.name}" filterable="true" sortable="true"
+                             headerText="#{bindings.JobsView1.hints.MaxSalary.label}" id="c3">
+                    <af:outputText value="#{row.MaxSalary}" shortDesc="#{bindings.JobsView1.hints.MaxSalary.tooltip}"
+                                   id="ot3">
+                      <af:convertNumber groupingUsed="false" pattern="#{bindings.JobsView1.hints.MaxSalary.format}"/>
+                    </af:outputText>
+                  </af:column>
+                </af:table>
+              </f:facet>
+                  <f:facet name="second">
+                <af:panelStretchLayout id="psl2" bottomHeight="51px">
+                  <f:facet name="start"/>
+                  <f:facet name="end"/>
+                  <f:facet name="top">
+                    <af:panelGroupLayout id="pgl7" halign="center" layout="vertical">
+                      <af:inputComboboxListOfValues id="jobTitleId"
+                                                    popupTitle="Search and Select: #{bindings.JobTitle.hints.label}"
+                                                    value="#{bindings.JobTitle.inputValue}"
+                                                    label="#{bindings.JobTitle.hints.label}"
+                                                    model="#{bindings.JobTitle.listOfValuesModel}"
+                                                    required="#{bindings.JobTitle.hints.mandatory}"
+                                                    columns="#{bindings.JobTitle.hints.displayWidth}"
+                                                    shortDesc="#{bindings.JobTitle.hints.tooltip}">
+                        <f:validator binding="#{bindings.JobTitle.validator}"/>
+                      </af:inputComboboxListOfValues>
+                    </af:panelGroupLayout>
+                  </f:facet>
+                  <f:facet name="bottom">
+                    <af:popup childCreation="deferred" autoCancel="disabled" id="pop1">
+                      <af:dialog id="d1" type="none">
+                        <f:facet name="buttonBar">
+                          <af:panelGroupLayout id="pgl6">
+                            <af:button text="Ok" id="b2"/>
+                            <af:button text="Cancel" id="b3"/>
+                          </af:panelGroupLayout>
+                        </f:facet>
+                        <af:button text="button 1" id="b4"/>
+                      </af:dialog>
+                    </af:popup>
+                  </f:facet>
+                  <f:facet name="center">
+                    <af:panelGroupLayout id="pgl3" layout="horizontal">
+                      <af:panelGroupLayout id="pgl4" layout="vertical" halign="center">
+                        <af:image source="#{resource['images:avatar.jpg']}" id="i1"
+                                  inlineStyle="height:150px; width:100px;margin-right:15px;"/>
+                        <af:link text="Detail" id="l1">
+                          <af:showPopupBehavior popupId="::pop1"/>
+                        </af:link>
+                      </af:panelGroupLayout>
+                      <af:panelGroupLayout id="pgl8" layout="vertical">
+                        <af:panelFormLayout id="pfl1">
+                          <af:inputText value="#{bindings.FirstName.inputValue}"
+                                        label="#{bindings.FirstName.hints.label} : "
+                                        required="#{bindings.FirstName.hints.mandatory}" readOnly="true"
+                                        columns="#{bindings.FirstName.hints.displayWidth}"
+                                        maximumLength="#{bindings.FirstName.hints.precision}"
+                                        shortDesc="#{bindings.FirstName.hints.tooltip}" id="it1">
+                            <f:validator binding="#{bindings.FirstName.validator}"/>
+                          </af:inputText>
+                          <af:inputText value="#{bindings.LastName.inputValue}"
+                                        label="#{bindings.LastName.hints.label} :"
+                                        required="#{bindings.LastName.hints.mandatory}" readOnly="true"
+                                        columns="#{bindings.LastName.hints.displayWidth}"
+                                        maximumLength="#{bindings.LastName.hints.precision}"
+                                        shortDesc="#{bindings.LastName.hints.tooltip}" id="it2">
+                            <f:validator binding="#{bindings.LastName.validator}"/>
+                          </af:inputText>
+                          <af:inputText value="#{bindings.Email.inputValue}" label="#{bindings.Email.hints.label} :"
+                                        required="#{bindings.Email.hints.mandatory}" readOnly="true"
+                                        columns="#{bindings.Email.hints.displayWidth}"
+                                        maximumLength="#{bindings.Email.hints.precision}"
+                                        shortDesc="#{bindings.Email.hints.tooltip}" id="it3">
+                            <f:validator binding="#{bindings.Email.validator}"/>
+                          </af:inputText>
+                          <af:inputText value="#{bindings.PhoneNumber.inputValue}"
+                                        label="#{bindings.PhoneNumber.hints.label} :"
+                                        required="#{bindings.PhoneNumber.hints.mandatory}" readOnly="true"
+                                        columns="#{bindings.PhoneNumber.hints.displayWidth}"
+                                        maximumLength="#{bindings.PhoneNumber.hints.precision}"
+                                        shortDesc="#{bindings.PhoneNumber.hints.tooltip}" id="it4">
+                            <f:validator binding="#{bindings.PhoneNumber.validator}"/>
+                          </af:inputText>
+                          <af:inputDate value="#{bindings.HireDate.inputValue}" readOnly="true"
+                                        label="#{bindings.HireDate.hints.label} :"
+                                        required="#{bindings.HireDate.hints.mandatory}"
+                                        columns="#{bindings.HireDate.hints.displayWidth}"
+                                        shortDesc="#{bindings.HireDate.hints.tooltip}" id="id1">
+                            <f:validator binding="#{bindings.HireDate.validator}"/>
+                            <af:convertDateTime pattern="#{bindings.HireDate.format}"/>
+                          </af:inputDate>
+                          <af:inputText value="#{bindings.Salary.inputValue}" label="#{bindings.Salary.hints.label} :"
+                                        required="#{bindings.Salary.hints.mandatory}" readOnly="true"
+                                        columns="#{bindings.Salary.hints.displayWidth}"
+                                        maximumLength="#{bindings.Salary.hints.precision}"
+                                        shortDesc="#{bindings.Salary.hints.tooltip}" id="it5">
+                            <f:validator binding="#{bindings.Salary.validator}"/>
+                            <af:convertNumber groupingUsed="false" pattern="#{bindings.Salary.format}"/>
+                          </af:inputText>
+                          <af:inputText label="Location :" id="it6" value="Ukraine, Lviv" readOnly="true"/>
+                        </af:panelFormLayout>
+                      </af:panelGroupLayout>
+                    </af:panelGroupLayout>
+                  </f:facet>
+                </af:panelStretchLayout>
+              </f:facet>
+                </af:panelSplitter>
+              </f:facet>
+            </af:panelSplitter>
+          </af:panelGroupLayout>
+    </f:facet>
+  </af:panelStretchLayout>
+</jsp:root>

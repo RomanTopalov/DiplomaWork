@@ -1,0 +1,201 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelStretchLayout id="psl1">
+    <f:facet name="start"/>
+    <f:facet name="end"/>
+    <f:facet name="top">
+      <af:panelGroupLayout id="pgl1">
+        <af:button text="Back" id="b4" action="toMainPage" icon="#{resource['images:arrow_left.png']}"/>
+      </af:panelGroupLayout>
+    </f:facet>
+    <f:facet name="bottom"/>
+    <f:facet name="center">
+      <af:panelGroupLayout layout="vertical" id="pgl2">
+        <af:panelHeader text="Jobs" id="ph1">
+          <af:query id="qryId1" headerText="Search" disclosed="true"
+                    value="#{bindings.JobsSearchCriteriaQuery.queryDescriptor}"
+                    model="#{bindings.JobsSearchCriteriaQuery.queryModel}"
+                    queryListener="#{bindings.JobsSearchCriteriaQuery.processQuery}"
+                    queryOperationListener="#{bindings.JobsSearchCriteriaQuery.processQueryOperation}"
+                    resultComponentId="::pc1:resId1"/>
+        </af:panelHeader>
+        <af:panelCollection id="pc1">
+          <f:facet name="menus">
+            <af:menu text="Excel" id="m1" icon="#{resource['images:excel.png']}">
+              <af:commandMenuItem text="Download" id="cmi1">
+                <af:exportCollectionActionListener type="excelHTML" exportedId="resId1" filename="jobDataMsg"
+                                                   title="JobDataMsg"/>
+              </af:commandMenuItem>
+            </af:menu>
+          </f:facet>
+          <f:facet name="toolbar">
+            <af:toolbar id="t2">
+              <af:button text="Create" id="b1" icon="#{resource['images:add_ena.png']}">
+                <af:showPopupBehavior popupId="::p1"/>
+              </af:button>
+              <af:button text="Update" id="b2" icon="#{resource['images:edit.png']}">
+                <af:showPopupBehavior popupId="::p2"/>
+              </af:button>
+              <af:button text="Delete" id="b3" icon="#{resource['images:delete_ena.png']}">
+                <af:showPopupBehavior popupId="::p3"/>
+              </af:button>
+            </af:toolbar>
+          </f:facet>
+          <f:facet name="statusbar"/>
+          <af:table value="#{bindings.JobsView11.collectionModel}" var="row" rows="#{bindings.JobsView1.rangeSize}"
+                    emptyText="#{bindings.JobsView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    rowBandingInterval="0" selectedRowKeys="#{bindings.JobsView11.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.JobsView11.collectionModel.makeCurrent}" rowSelection="single"
+                    fetchSize="#{bindings.JobsView1.rangeSize}" filterModel="#{bindings.JobsView1Query.queryDescriptor}"
+                    filterVisible="true" queryListener="#{bindings.JobsView1Query.processQuery}" varStatus="vs"
+                    id="resId1" allDetailsEnabled="true">
+            <af:column sortProperty="#{bindings.JobsView1.hints.JobId.name}" filterable="true" sortable="true"
+                       headerText="#{bindings.JobsView1.hints.JobId.label}" id="c1" width="98">
+              <af:outputText value="#{row.JobId}" shortDesc="#{bindings.JobsView1.hints.JobId.tooltip}" id="ot1"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.JobsView11.hints.JobTitle.name}" filterable="true" sortable="true"
+                       headerText="#{bindings.JobsView1.hints.JobTitle.label}" id="c2" width="102">
+              <af:selectOneChoice value="#{row.bindings.JobTitle.inputValue}" label="#{row.bindings.JobTitle.label}"
+                                  required="#{bindings.JobsView1.hints.JobTitle.mandatory}"
+                                  shortDesc="#{bindings.JobsView1.hints.JobTitle.tooltip}" readOnly="true" id="soc1">
+                <f:selectItems value="#{row.bindings.JobTitle.items}" id="si1"/>
+                <f:validator binding="#{row.bindings.JobTitle.validator}"/>
+              </af:selectOneChoice>
+            </af:column>
+            <af:column sortProperty="#{bindings.JobsView11.hints.MinSalary.name}" filterable="true" sortable="true"
+                       headerText="#{bindings.JobsView1.hints.MinSalary.label}" id="c3" width="100">
+              <af:outputText value="#{row.MinSalary}" shortDesc="#{bindings.JobsView1.hints.MinSalary.tooltip}"
+                             id="ot2">
+                <af:convertNumber groupingUsed="false" pattern="#{bindings.JobsView1.hints.MinSalary.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.JobsView11.hints.MaxSalary.name}" filterable="true" sortable="true"
+                       headerText="#{bindings.JobsView1.hints.MaxSalary.label}" id="c4" width="100">
+              <af:outputText value="#{row.MaxSalary}" shortDesc="#{bindings.JobsView1.hints.MaxSalary.tooltip}"
+                             id="ot3">
+                <af:convertNumber groupingUsed="false" pattern="#{bindings.JobsView1.hints.MaxSalary.format}"/>
+              </af:outputText>
+            </af:column>
+          </af:table>
+        </af:panelCollection>
+        <af:popup childCreation="deferred"  id="p1" resetEditableValues="whenCanceled"
+                  animate="true" binding="#{pageFlowScope.JobManagerBean.addPopup}" contentDelivery="lazyUncached"
+                  autoCancel="disabled">
+          <af:dialog id="d1" type="none" title="Add new Job">
+            <f:facet name="buttonBar">
+              <af:panelGroupLayout id="pgl3" layout="horizontal" halign="right">
+                <af:button text="Create" id="b5" action="#{pageFlowScope.JobManagerBean.Add_JobAction}"/>
+                <af:spacer width="10" height="10" id="s1"/>
+                <af:button text="Cancel" id="b6" action="#{pageFlowScope.JobManagerBean.closePopup}"/>
+              </af:panelGroupLayout>
+            </f:facet>
+            <af:panelStretchLayout id="psl2" bottomHeight="17px">
+              <f:facet name="start"/>
+              <f:facet name="end"/>
+              <f:facet name="top"/>
+              <f:facet name="bottom"/>
+              <f:facet name="center">
+                <af:panelFormLayout id="pfl1">
+                  <f:facet name="footer"/>
+                  <af:inputText value="#{pageFlowScope.JobManagerBean.jobsPojo.jobTitle}" label="#{bindings.jobTitle.hints.label}"
+                                required="#{bindings.jobTitle.hints.mandatory}"
+                                columns="#{bindings.jobTitle.hints.displayWidth}"
+                                maximumLength="#{bindings.jobTitle.hints.precision}"
+                                shortDesc="#{bindings.jobTitle.hints.tooltip}" id="it1">
+                    <f:validator binding="#{bindings.jobTitle.validator}"/>
+                  </af:inputText>
+                  <af:spacer width="10" height="10" id="s2"/>
+                  <af:inputText value="#{pageFlowScope.JobManagerBean.jobsPojo.minSalary}" label="#{bindings.minSalary.hints.label}"
+                                required="#{bindings.minSalary.hints.mandatory}"
+                                columns="#{bindings.minSalary.hints.displayWidth}"
+                                maximumLength="#{bindings.minSalary.hints.precision}"
+                                shortDesc="#{bindings.minSalary.hints.tooltip}" id="it2">
+                    <f:validator binding="#{bindings.minSalary.validator}"/>
+                  </af:inputText>
+                  <af:spacer width="10" height="10" id="s3"/>
+                  <af:inputText value="#{pageFlowScope.JobManagerBean.jobsPojo.maxSalary}" label="#{bindings.maxSalary.hints.label}"
+                                required="#{bindings.maxSalary.hints.mandatory}"
+                                columns="#{bindings.maxSalary.hints.displayWidth}"
+                                maximumLength="#{bindings.maxSalary.hints.precision}"
+                                shortDesc="#{bindings.maxSalary.hints.tooltip}" id="it3">
+                    <f:validator binding="#{bindings.maxSalary.validator}"/>
+                  </af:inputText>
+                </af:panelFormLayout>
+              </f:facet>
+            </af:panelStretchLayout>
+          </af:dialog>
+        </af:popup>
+        <af:popup childCreation="deferred" id="p2"
+                  binding="#{pageFlowScope.JobManagerBean.updatePopup}" contentDelivery="lazyUncached"
+                  resetEditableValues="whenCanceled">
+          <af:dialog id="d2" type="none">
+            <f:facet name="buttonBar">
+              <af:panelGroupLayout id="pgl4" halign="right">
+                <af:button text="Update" id="b7" action="#{pageFlowScope.JobManagerBean.Update_JobAction}"/>
+                <af:button text="Cancel" id="b8" action="#{pageFlowScope.JobManagerBean.closePopup}"/>
+              </af:panelGroupLayout>
+            </f:facet>
+            <af:panelStretchLayout id="psl3" bottomHeight="33px" endWidth="50px" inlineStyle="height:313px;">
+              <f:facet name="start"/>
+              <f:facet name="end"/>
+              <f:facet name="top"/>
+              <f:facet name="bottom"/>
+              <f:facet name="center">
+                <af:panelFormLayout id="pfl2">
+                  <f:facet name="footer"/>
+                  <af:inputText value="#{bindings.JobTitle.inputValue}" label="#{bindings.JobTitle.hints.label}"
+                                required="#{bindings.JobTitle.hints.mandatory}"
+                                columns="#{bindings.JobTitle.hints.displayWidth}"
+                                maximumLength="#{bindings.JobTitle.hints.precision}"
+                                shortDesc="#{bindings.JobTitle.hints.tooltip}" id="it4">
+                    <f:validator binding="#{bindings.JobTitle.validator}"/>
+                  </af:inputText>
+                  <af:spacer width="10" height="10" id="s4"/>
+                  <af:inputText value="#{bindings.MaxSalary.inputValue}" label="#{bindings.MaxSalary.hints.label}"
+                                required="#{bindings.MaxSalary.hints.mandatory}"
+                                columns="#{bindings.MaxSalary.hints.displayWidth}"
+                                maximumLength="#{bindings.MaxSalary.hints.precision}"
+                                shortDesc="#{bindings.MaxSalary.hints.tooltip}" id="it5">
+                    <f:validator binding="#{bindings.MaxSalary.validator}"/>
+                    <af:convertNumber groupingUsed="false" pattern="#{bindings.MaxSalary.format}"/>
+                  </af:inputText>
+                  <af:spacer width="10" height="10" id="s5"/>
+                  <af:inputText value="#{bindings.MinSalary.inputValue}" label="#{bindings.MinSalary.hints.label}"
+                                required="#{bindings.MinSalary.hints.mandatory}"
+                                columns="#{bindings.MinSalary.hints.displayWidth}"
+                                maximumLength="#{bindings.MinSalary.hints.precision}"
+                                shortDesc="#{bindings.MinSalary.hints.tooltip}" id="it6">
+                    <f:validator binding="#{bindings.MinSalary.validator}"/>
+                    <af:convertNumber groupingUsed="false" pattern="#{bindings.MinSalary.format}"/>
+                  </af:inputText>
+                </af:panelFormLayout>
+              </f:facet>
+            </af:panelStretchLayout>
+          </af:dialog>
+        </af:popup>
+        <af:popup childCreation="deferred" autoCancel="disabled" id="p3"
+                  binding="#{pageFlowScope.JobManagerBean.deletePopup}" contentDelivery="lazyUncached">
+          <af:dialog id="d3" type="none">
+            <f:facet name="buttonBar">
+              <af:panelGroupLayout id="pgl5" halign="right">
+                <af:button text="Delete" id="b9" action="#{pageFlowScope.JobManagerBean.delete_JobAction}"/>
+                <af:button text="Cancel" id="b10" action="#{pageFlowScope.JobManagerBean.closePopup}"/>
+              </af:panelGroupLayout>
+            </f:facet>
+            <af:panelStretchLayout id="psl4">
+              <f:facet name="start"/>
+              <f:facet name="end"/>
+              <f:facet name="top"/>
+              <f:facet name="bottom"/>
+              <f:facet name="center">
+                <af:outputText value="Delete these information?" id="ot4" inlineStyle="font-size:large;"/>
+              </f:facet>
+            </af:panelStretchLayout>
+          </af:dialog>
+        </af:popup>
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:panelStretchLayout>
+  <!--oracle-jdev-comment:preferred-managed-bean-name:JobManagerBean-->
+</jsp:root>

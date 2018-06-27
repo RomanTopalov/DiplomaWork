@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.12.2" id="jobInfoMsgPageDef"
+                Package="view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="JobsView1" RangeSize="25" DataControl="AppModuleDataControl" id="JobsView1Iterator"/>
+    <searchRegion Binds="JobsView1Iterator" Criteria="" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="JobsView1Query"/>
+    <searchRegion Criteria="JobsSearchCriteria" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="JobsView1Iterator" id="JobsSearchCriteriaQuery"/>
+    <iterator Binds="root" RangeSize="25" DataControl="JobsPojo" id="JobsPojoIterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="JobsView1Iterator" id="JobsView1">
+      <nodeDefinition DefName="model.JobsView" Name="JobsView10">
+        <AttrNames>
+          <Item Value="JobId"/>
+          <Item Value="JobTitle"/>
+          <Item Value="MinSalary"/>
+          <Item Value="MaxSalary"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="JobsView1Iterator" id="JobsView11">
+      <nodeDefinition DefName="model.JobsView" Name="JobsView110">
+        <AttrNames>
+          <Item Value="JobId"/>
+          <Item Value="JobTitle"/>
+          <Item Value="MinSalary"/>
+          <Item Value="MaxSalary"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="JobsView1Iterator" id="JobTitle">
+      <AttrNames>
+        <Item Value="JobTitle"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="JobsView1Iterator" id="Create" InstanceName="AppModuleDataControl.JobsView1"
+            DataControl="AppModuleDataControl" RequiresUpdateModel="true" Action="createRow"/>
+    <action IterBinding="JobsView1Iterator" id="Delete" InstanceName="AppModuleDataControl.JobsView1"
+            DataControl="AppModuleDataControl" RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action IterBinding="JobsView1Iterator" id="CreateInsert" InstanceName="AppModuleDataControl.JobsView1"
+            DataControl="AppModuleDataControl" RequiresUpdateModel="true" Action="createInsertRow"/>
+    <attributeValues IterBinding="JobsPojoIterator" id="jobTitle">
+      <AttrNames>
+        <Item Value="jobTitle"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="JobsPojoIterator" id="minSalary">
+      <AttrNames>
+        <Item Value="minSalary"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="JobsPojoIterator" id="maxSalary">
+      <AttrNames>
+        <Item Value="maxSalary"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Commit" DataControl="AppModuleDataControl" RequiresUpdateModel="true" Action="commitTransaction"/>
+    <attributeValues IterBinding="JobsView1Iterator" id="JobId">
+      <AttrNames>
+        <Item Value="JobId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="JobsView1Iterator" id="MinSalary">
+      <AttrNames>
+        <Item Value="MinSalary"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="JobsView1Iterator" id="MaxSalary">
+      <AttrNames>
+        <Item Value="MaxSalary"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

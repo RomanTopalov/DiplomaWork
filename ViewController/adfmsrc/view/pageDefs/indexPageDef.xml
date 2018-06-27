@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.12.2" id="indexPageDef"
+                Package="view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="EmployeesView1" RangeSize="-1" DataControl="AppModuleDataControl" id="EmployeesView1Iterator"/>
+    <searchRegion Criteria="EmployeesViewCriteria" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="EmployeesView1Iterator" id="EmployeesViewCriteriaQuery"/>
+    <iterator Binds="JobsView1" RangeSize="-1" DataControl="AppModuleDataControl" id="JobsView1Iterator"/>
+    <searchRegion Binds="JobsView1Iterator" Criteria="" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="JobsView1Query"/>
+    <taskFlow id="jobstaskflow1" taskFlowId="/WEB-INF/jobs-task-flow.xml#jobs-task-flow" activation="deferred"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="EmployeesView1Iterator" id="FirstName">
+      <AttrNames>
+        <Item Value="FirstName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="EmployeesView1Iterator" id="LastName">
+      <AttrNames>
+        <Item Value="LastName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="EmployeesView1Iterator" id="Email">
+      <AttrNames>
+        <Item Value="Email"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="EmployeesView1Iterator" id="PhoneNumber">
+      <AttrNames>
+        <Item Value="PhoneNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="EmployeesView1Iterator" id="Salary">
+      <AttrNames>
+        <Item Value="Salary"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="EmployeesView1Iterator" id="First" RequiresUpdateModel="true" Action="first"/>
+    <action IterBinding="EmployeesView1Iterator" id="Previous" RequiresUpdateModel="true" Action="previous"/>
+    <action IterBinding="EmployeesView1Iterator" id="Next" RequiresUpdateModel="true" Action="next"/>
+    <action IterBinding="EmployeesView1Iterator" id="Last" RequiresUpdateModel="true" Action="last"/>
+    <tree IterBinding="EmployeesView1Iterator" id="EmployeesView11">
+      <nodeDefinition DefName="model.EmployeesView" Name="EmployeesView110">
+        <AttrNames>
+          <Item Value="FirstName"/>
+          <Item Value="LastName"/>
+          <Item Value="Email"/>
+          <Item Value="PhoneNumber"/>
+          <Item Value="HireDate"/>
+          <Item Value="Salary"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="EmployeesView1Iterator" id="EmployeesView1" ChangeEventPolicy="ppr">
+      <nodeDefinition DefName="model.EmployeesView" Name="EmployeesView1">
+        <AttrNames>
+          <Item Value="Salary"/>
+          <Item Value="HireDate"/>
+          <Item Value="LastName"/>
+          <Item Value="FirstName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="EmployeesView1Iterator" id="EmployeesView12" ChangeEventPolicy="ppr">
+      <nodeDefinition DefName="model.EmployeesView" Name="EmployeesView12">
+        <AttrNames>
+          <Item Value="Salary"/>
+          <Item Value="CommissionPct"/>
+          <Item Value="HireDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="EmployeesView1Iterator" id="JobTitle" DTSupportsMRU="true" SelectItemValueMode="ListObject"
+          StaticList="false" ListIter="JobsView1Iterator">
+      <AttrNames>
+        <Item Value="JobId"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="JobId"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="JobTitle"/>
+      </ListDisplayAttrNames>
+    </list>
+    <tree IterBinding="JobsView1Iterator" id="JobsView1">
+      <nodeDefinition DefName="model.JobsView" Name="JobsView10">
+        <AttrNames>
+          <Item Value="JobTitle"/>
+          <Item Value="MinSalary"/>
+          <Item Value="MaxSalary"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

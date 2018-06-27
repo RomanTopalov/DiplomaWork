@@ -1,0 +1,248 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core" xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces"
+          xmlns:c="http://java.sun.com/jsp/jstl/core">
+  <c:set var="viewcontrollerBundle" value="#{adfBundle['view.ViewControllerBundle']}"/>
+  <af:panelStretchLayout id="psl1" topHeight="36px">
+    <f:facet name="start"/>
+    <f:facet name="end"/>
+    <f:facet name="top">
+      <af:panelGroupLayout id="pgl6" layout="vertical" valign="middle" halign="right">
+        <af:spacer width="10" height="10" id="s1"/>
+        <af:panelGroupLayout id="pgl7">
+          <af:activeOutputText value="#{securityContext.userName}" id="aot1" inlineStyle="font-size:large;"/>
+          <af:spacer width="10" height="10" id="s2"/>
+          <af:link text="logout" id="l1"
+                   destination="#{'/adfAuthentication?logout=true&amp;end_url=/faces/login.html'}"
+                   inlineStyle="font-size:large;" icon="#{resource['images:logout.png']}"/>
+          <af:spacer width="10" height="10" id="s3"/>
+        </af:panelGroupLayout>
+      </af:panelGroupLayout>
+    </f:facet>
+    <f:facet name="bottom"/>
+    <f:facet name="center">
+      <af:panelTabbed position="above" id="pt1">
+        <af:showDetailItem id="tab1" text="Employee" inlineStyle="font-size:large;">
+          <af:panelGroupLayout id="pgl5" inlineStyle="height:34px;margin-left:1120px;">
+            <af:button text="Employee service" id="b5" action="#{pageFlowScope.TriggerBean.goToEmployeeCRUD}"/>
+          </af:panelGroupLayout>
+          <af:panelGroupLayout id="pgl1" inlineStyle="width:1288px;">
+            <af:panelGroupLayout id="pgl2" inlineStyle="height:748px; width:1246px;">
+              <af:panelSplitter id="ps1" inlineStyle="width:1290px; height:725px;" splitterPosition="309" orientation="vertical">
+                <f:facet name="first">
+                  <af:panelSplitter id="ps2" splitterPosition="302">
+                    <f:facet name="first">
+                      <af:panelFormLayout id="pfl1">
+                        <af:inputText value="#{bindings.FirstName.inputValue}" label="#{bindings.FirstName.hints.label}"
+                                      required="#{bindings.FirstName.hints.mandatory}" readOnly="true"
+                                      columns="#{bindings.FirstName.hints.displayWidth}"
+                                      maximumLength="#{bindings.FirstName.hints.precision}"
+                                      shortDesc="#{bindings.FirstName.hints.tooltip}" id="it1">
+                          <f:validator binding="#{bindings.FirstName.validator}"/>
+                        </af:inputText>
+                        <af:inputText value="#{bindings.LastName.inputValue}" label="#{bindings.LastName.hints.label}"
+                                      required="#{bindings.LastName.hints.mandatory}" readOnly="true"
+                                      columns="#{bindings.LastName.hints.displayWidth}"
+                                      maximumLength="#{bindings.LastName.hints.precision}"
+                                      shortDesc="#{bindings.LastName.hints.tooltip}" id="it2">
+                          <f:validator binding="#{bindings.LastName.validator}"/>
+                        </af:inputText>
+                        <af:inputText value="#{bindings.Email.inputValue}" label="#{bindings.Email.hints.label}"
+                                      required="#{bindings.Email.hints.mandatory}" readOnly="true"
+                                      columns="#{bindings.Email.hints.displayWidth}"
+                                      maximumLength="#{bindings.Email.hints.precision}"
+                                      shortDesc="#{bindings.Email.hints.tooltip}" id="it3">
+                          <f:validator binding="#{bindings.Email.validator}"/>
+                        </af:inputText>
+                        <af:inputText value="#{bindings.PhoneNumber.inputValue}"
+                                      label="#{bindings.PhoneNumber.hints.label}"
+                                      required="#{bindings.PhoneNumber.hints.mandatory}" readOnly="true"
+                                      columns="#{bindings.PhoneNumber.hints.displayWidth}"
+                                      maximumLength="#{bindings.PhoneNumber.hints.precision}"
+                                      shortDesc="#{bindings.PhoneNumber.hints.tooltip}" id="it4">
+                          <f:validator binding="#{bindings.PhoneNumber.validator}"/>
+                        </af:inputText>
+                        <af:inputText value="#{bindings.Salary.inputValue}" label="#{bindings.Salary.hints.label}"
+                                      required="#{bindings.Salary.hints.mandatory}" readOnly="true"
+                                      columns="#{bindings.Salary.hints.displayWidth}"
+                                      maximumLength="#{bindings.Salary.hints.precision}"
+                                      shortDesc="#{bindings.Salary.hints.tooltip}" id="it5">
+                          <f:validator binding="#{bindings.Salary.validator}"/>
+                          <af:convertNumber groupingUsed="false" pattern="#{bindings.Salary.format}"/>
+                        </af:inputText>
+                        <f:facet name="footer">
+                          <af:panelGroupLayout layout="horizontal" id="pgl3">
+                            <af:button actionListener="#{bindings.First.execute}" text="First"
+                                       disabled="#{!bindings.First.enabled}" partialSubmit="true" id="b1"/>
+                            <af:button actionListener="#{bindings.Previous.execute}" text="Previous"
+                                       disabled="#{!bindings.Previous.enabled}" partialSubmit="true" id="b2"/>
+                            <af:button actionListener="#{bindings.Next.execute}" text="Next"
+                                       disabled="#{!bindings.Next.enabled}" partialSubmit="true" id="b3"/>
+                            <af:button actionListener="#{bindings.Last.execute}" text="Last"
+                                       disabled="#{!bindings.Last.enabled}" partialSubmit="true" id="b4"/>
+                          </af:panelGroupLayout>
+                        </f:facet>
+                      </af:panelFormLayout>
+                    </f:facet>
+                    <f:facet name="second">
+                      <dvt:barChart selectionListener="#{bindings.EmployeesView1.collectionModel.makeCurrent}"
+                                    dataSelection="single" id="barChart1" var="row"
+                                    value="#{bindings.EmployeesView1.collectionModel}"
+                                    partialTriggers="::b1 ::b2 ::b3 ::b4">
+                        <dvt:chartLegend id="cl1"/>
+                        <f:facet name="dataStamp">
+                          <dvt:chartDataItem id="di1" series="#{row.HireDate} #{row.LastName} #{row.FirstName}"
+                                             value="#{row.Salary}"
+                                             group="#{bindings.EmployeesView1.hints.Salary.label}"/>
+                        </f:facet>
+                      </dvt:barChart>
+                    </f:facet>
+                  </af:panelSplitter>
+                </f:facet>
+                <f:facet name="second">
+                  <af:panelSplitter id="ps3" splitterPosition="671">
+                    <f:facet name="first">
+                      <af:panelGroupLayout layout="vertical" id="pgl4">
+                        <af:panelHeader text="Employees" id="ph1">
+                          <af:query id="qryId1" headerText="Search" disclosed="true"
+                                    value="#{bindings.EmployeesViewCriteriaQuery.queryDescriptor}"
+                                    model="#{bindings.EmployeesViewCriteriaQuery.queryModel}"
+                                    queryListener="#{bindings.EmployeesViewCriteriaQuery.processQuery}"
+                                    queryOperationListener="#{bindings.EmployeesViewCriteriaQuery.processQueryOperation}"
+                                    resultComponentId="::resId1"/>
+                        </af:panelHeader>
+                        <af:table value="#{bindings.EmployeesView11.collectionModel}" var="row"
+                                  rows="#{bindings.EmployeesView11.rangeSize}"
+                                  emptyText="#{bindings.EmployeesView11.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  rowBandingInterval="0"
+                                  selectedRowKeys="#{bindings.EmployeesView11.collectionModel.selectedRow}"
+                                  selectionListener="#{bindings.EmployeesView11.collectionModel.makeCurrent}"
+                                  rowSelection="single" fetchSize="#{bindings.EmployeesView11.rangeSize}"
+                                  filterModel="#{bindings.EmployeesViewCriteriaQuery.queryDescriptor}"
+                                  filterVisible="true"
+                                  queryListener="#{bindings.EmployeesViewCriteriaQuery.processQuery}" varStatus="vs"
+                                  id="resId1" partialTriggers="::b1 ::b2 ::b3 ::b4">
+                          <af:column sortProperty="#{bindings.EmployeesView11.hints.FirstName.name}" filterable="true"
+                                     sortable="true" headerText="#{bindings.EmployeesView11.hints.FirstName.label}"
+                                     id="resId1c1">
+                            <af:outputText value="#{row.FirstName}"
+                                           shortDesc="#{bindings.EmployeesView11.hints.FirstName.tooltip}" id="ot1"/>
+                          </af:column>
+                          <af:column sortProperty="#{bindings.EmployeesView11.hints.LastName.name}" filterable="true"
+                                     sortable="true" headerText="#{bindings.EmployeesView11.hints.LastName.label}"
+                                     id="resId1c2">
+                            <af:outputText value="#{row.LastName}"
+                                           shortDesc="#{bindings.EmployeesView11.hints.LastName.tooltip}" id="ot2"/>
+                          </af:column>
+                          <af:column sortProperty="#{bindings.EmployeesView11.hints.Email.name}" filterable="true"
+                                     sortable="true" headerText="#{bindings.EmployeesView11.hints.Email.label}"
+                                     id="resId1c3">
+                            <af:outputText value="#{row.Email}"
+                                           shortDesc="#{bindings.EmployeesView11.hints.Email.tooltip}" id="ot3"/>
+                          </af:column>
+                          <af:column sortProperty="#{bindings.EmployeesView11.hints.PhoneNumber.name}" filterable="true"
+                                     sortable="true" headerText="#{bindings.EmployeesView11.hints.PhoneNumber.label}"
+                                     id="resId1c4">
+                            <af:outputText value="#{row.PhoneNumber}"
+                                           shortDesc="#{bindings.EmployeesView11.hints.PhoneNumber.tooltip}" id="ot4"/>
+                          </af:column>
+                          <af:column sortProperty="#{bindings.EmployeesView11.hints.HireDate.name}" filterable="true"
+                                     sortable="true" headerText="#{bindings.EmployeesView11.hints.HireDate.label}"
+                                     id="resId1c5">
+                            <f:facet name="filter">
+                              <af:inputDate value="#{bindings.EmployeesViewCriteriaQuery.queryDescriptor.filterConjunctionCriterion.criterionMap.HireDate.value}"
+                                            id="id1">
+                                <af:convertDateTime pattern="#{bindings.EmployeesView11.hints.HireDate.format}"/>
+                              </af:inputDate>
+                            </f:facet>
+                            <af:outputText value="#{row.HireDate}"
+                                           shortDesc="#{bindings.EmployeesView11.hints.HireDate.tooltip}" id="ot5">
+                              <af:convertDateTime pattern="#{bindings.EmployeesView11.hints.HireDate.format}"/>
+                            </af:outputText>
+                          </af:column>
+                          <af:column sortProperty="#{bindings.EmployeesView11.hints.Salary.name}" filterable="true"
+                                     sortable="true" headerText="#{bindings.EmployeesView11.hints.Salary.label}"
+                                     id="resId1c6">
+                            <af:outputText value="#{row.Salary}"
+                                           shortDesc="#{bindings.EmployeesView11.hints.Salary.tooltip}" id="ot6">
+                              <af:convertNumber groupingUsed="false"
+                                                pattern="#{bindings.EmployeesView11.hints.Salary.format}"/>
+                            </af:outputText>
+                          </af:column>
+                        </af:table>
+                      </af:panelGroupLayout>
+                    </f:facet>
+                    <f:facet name="second">
+                      <dvt:pieChart id="pieChart1" var="row" value="#{bindings.EmployeesView12.collectionModel}"
+                                    inlineStyle="width:550px;height:500px;">
+                        <dvt:chartLegend id="cl2"/>
+                        <dvt:pieDataItem id="di2" label="#{row.CommissionPct} " value="#{row.Salary}"/>
+                      </dvt:pieChart>
+                    </f:facet>
+                  </af:panelSplitter>
+                </f:facet>
+              </af:panelSplitter>
+            </af:panelGroupLayout>
+          </af:panelGroupLayout>
+        </af:showDetailItem>
+        <af:showDetailItem text="Jobs" id="sdi1" inlineStyle="font-size:large;">
+          <af:region value="#{bindings.jobstaskflow1.regionModel}" id="r1"/>
+        </af:showDetailItem>
+        <af:showDetailItem text="Location" id="sdi2">
+         <af:panelGroupLayout id="pgl11" layout="vertical" styleClass="AFSTretchWidth"
+                                     inlineStyle="height:600px;">
+                    <af:panelBox text="Add New Location" id="pb1" showDisclosure="false">
+                        <f:facet name="toolbar"/>
+                        <af:panelFormLayout id="pfl11" rows="1" maxColumns="2">
+                            <f:facet name="footer">
+                                <af:button text="Add Location" id="b11"
+                                           actionListener="#{pageFlowScope.MapBean.addLocationButton}"/>
+                            </f:facet>
+                            <af:inputText label="Country" id="it31"
+                                          contentStyle="width:100px;font-weight:bold;color:navy;"
+                                          binding="#{pageFlowScope.MapBean.cntryNmBind}"/>
+                            <af:inputText label="Location" id="it41"
+                                          contentStyle="width:100px;font-weight:bold;color:navy;"
+                                          binding="#{pageFlowScope.MapBean.locationBind}"/>
+                            <af:inputText label="Latitude" id="it11" contentStyle="width:100px;color:red;"
+                                          binding="#{pageFlowScope.MapBean.latitudeBind}"/>
+                            <af:inputText label="Longitude" id="it21" contentStyle="width:100px;color:red;"
+                                          binding="#{pageFlowScope.MapBean.longitudeBind}"/>
+                            <af:inputText label="Description" id="it51" contentStyle='width:200px;color:darkgreen;'
+                                          binding="#{pageFlowScope.MapBean.descriptionBind}"/>
+                        </af:panelFormLayout>
+                    </af:panelBox>
+                    <dvt:thematicMap basemap="world" id="tm1" summary="World Map" styleClass="AFStretchWidth"
+                                     partialTriggers="::b1" inlineStyle="background-color:#e9ffdc;">
+                        <dvt:areaLayer layer="continents" id="al2">
+                            <dvt:pointDataLayer id="dl1" value="#{pageFlowScope.MapBean.mapDetail}" var="row"
+                                                selectionMode="single"
+                                                selectionListener="#{pageFlowScope.MapBean.mapSelectionListener}"
+                                                binding="#{pageFlowScope.MapBean.dataLayerBind}">
+                                <dvt:pointLocation id="pl1" type="pointXY" pointY="#{row.lattitude}"
+                                                   pointX="#{row.longitude}">
+                                    <dvt:marker id="m1" shortDesc="#{row.textDisp}" fillColor="#ff0000"
+                                                borderWidth="1.0" scaleX="2.0" scaleY="2.0" labelDisplay="on"
+                                                labelPosition="bottom" shape="triangleDown" value="#{row.location}"
+                                                labelStyle="color:maroon;font-size:10px;"/>
+                                </dvt:pointLocation>
+                            </dvt:pointDataLayer>
+                        </dvt:areaLayer>
+                    </dvt:thematicMap>
+                </af:panelGroupLayout>
+        </af:showDetailItem>
+      </af:panelTabbed>
+    </f:facet>
+  </af:panelStretchLayout>
+  <af:popup childCreation="deferred" autoCancel="disabled" id="p1" binding="#{pageFlowScope.TriggerBean.warnigPopup}">
+    <af:dialog id="d1" type="none" title="WARNING !!!">
+      <f:facet name="buttonBar"/>
+      <af:panelGroupLayout id="pgl8">
+        <af:outputText value="#{securityContext.userName}" id="ot8" inlineStyle="font-size:x-large;"/>
+        <af:outputText value=", you don't have  permission to access this page . " id="ot7"
+                       inlineStyle="font-size:x-large;"/>
+      </af:panelGroupLayout>
+    </af:dialog>
+  </af:popup>
+  <!--oracle-jdev-comment:preferred-managed-bean-name:SequrityBean-->
+</jsp:root>

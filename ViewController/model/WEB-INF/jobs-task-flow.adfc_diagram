@@ -1,0 +1,55 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <TaskFlowCall
+      id="TaskFlowCall11">
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>taskFlowCallJob&lt;/b>&lt;/p>&lt;p>Activity Type:  Task Flow Call&lt;/p></property>
+      <property
+         name="activityId">taskFlowCallJob</property>
+      <property
+         name="x">693.68164</property>
+      <property
+         name="y">246.94238</property>
+      <property
+         name="documentReference">/WEB-INF/taskFlowCallJob.xml</property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="taskFlowId">taskFlowCallJob</property>
+   </TaskFlowCall>
+   <View
+      id="View12">
+      <property
+         name="activityId">jobs</property>
+      <property
+         name="pageFragment">true</property>
+      <property
+         name="x">279.0</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>jobs&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="y">186.23535</property>
+      <property
+         name="page">/jobs.jsff</property>
+      <property
+         name="exceptionHandler">false</property>
+   </View>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase14"
+      from="View12"
+      to="TaskFlowCall11">
+      <property
+         name="tosrcid">__3</property>
+      <property
+         name="fromOutcome">infoMsg</property>
+      <property
+         name="fromsrcid">__2</property>
+      <property
+         name="sdm:polyPoints">R50,320.0,185.88477,652.68164,246.5918,L50</property>
+   </ControlFlowCase>
+</SDM>

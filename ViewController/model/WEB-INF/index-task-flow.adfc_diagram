@@ -1,0 +1,74 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <View
+      id="View2">
+      <property
+         name="activityId">index</property>
+      <property
+         name="pageFragment">true</property>
+      <property
+         name="x">194.5</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>index&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="y">232.29297</property>
+      <property
+         name="page">/index.jsff</property>
+      <property
+         name="exceptionHandler">false</property>
+   </View>
+   <Router
+      id="Router3">
+      <property
+         name="activityId">router</property>
+      <property
+         name="x">405.0</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>router&lt;/b>&lt;/p>&lt;p>Activity Type:  Router&lt;/p></property>
+      <property
+         name="y">230.59766</property>
+      <property
+         name="exceptionHandler">false</property>
+   </Router>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase4"
+      from="View2"
+      to="Router3">
+      <property
+         name="fromOutcome">goToRouter</property>
+      <property
+         name="sdm:polyPoints">R50,235.5,231.94238,363.99997,230.24707,L50</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase6"
+      from="Router3"
+      to="TaskFlowCall7">
+      <property
+         name="fromOutcome">goToEmployee</property>
+      <property
+         name="sdm:polyPoints">R50,446.0,230.24707,602.6914,198.69336,L50</property>
+   </ControlFlowCase>
+   <TaskFlowCall
+      id="TaskFlowCall7">
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>employeeCRUDService&lt;/b>&lt;/p>&lt;p>Activity Type:  Task Flow Call&lt;/p></property>
+      <property
+         name="activityId">employeeCRUDService</property>
+      <property
+         name="x">643.6914</property>
+      <property
+         name="y">198.69336</property>
+      <property
+         name="documentReference">/WEB-INF/employeeCRUDService.xml</property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="taskFlowId">employeeCRUDService</property>
+   </TaskFlowCall>
+</SDM>

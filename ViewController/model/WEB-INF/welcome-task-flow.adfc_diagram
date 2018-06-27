@@ -1,0 +1,22 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <View
+      id="View2">
+      <property
+         name="activityId">welcome</property>
+      <property
+         name="x">594.5</property>
+      <property
+         name="start">false</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>welcome&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="y">300.29297</property>
+      <property
+         name="page">/welcome.jspx</property>
+      <property
+         name="exceptionHandler">false</property>
+   </View>
+</SDM>

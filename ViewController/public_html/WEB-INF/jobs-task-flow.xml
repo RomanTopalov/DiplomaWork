@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="jobs-task-flow">
+    <default-activity>jobs</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <input-parameter-definition id="__6">
+      <name>isActive</name>
+      <value>#{pageFlowScope.isActive}</value>
+      <class>view.JobManagerBean</class>
+    </input-parameter-definition>
+    <managed-bean id="__1">
+      <managed-bean-name>MapBean</managed-bean-name>
+      <managed-bean-class>view.bean.MapBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__4">
+      <managed-bean-name>JobManagerBean</managed-bean-name>
+      <managed-bean-class>view.JobManagerBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="jobs">
+      <page>/jobs.jsff</page>
+    </view>
+    <task-flow-call id="taskFlowCallJob">
+      <task-flow-reference>
+        <document>/WEB-INF/taskFlowCallJob.xml</document>
+        <id>taskFlowCallJob</id>
+      </task-flow-reference>
+    </task-flow-call>
+    <control-flow-rule id="__2">
+      <from-activity-id>jobs</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>infoMsg</from-outcome>
+        <to-activity-id>taskFlowCallJob</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>
